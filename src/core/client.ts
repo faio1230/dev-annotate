@@ -1,4 +1,5 @@
 import { DEFAULTS, type DevAnnotationOptions } from './types.js'
+export type { DevAnnotationOptions } from './types.js'
 
 export function initDevAnnotation(options: DevAnnotationOptions = {}): () => void {
   const endpoint    = options.endpoint    ?? DEFAULTS.endpoint

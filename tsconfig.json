@@ -9,7 +9,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "types": ["node"],
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "dev-annotate": ["./src/core/client.ts"],
+      "dev-annotate/server": ["./src/server/index.ts"]
+    }
   },
   "include": ["src", "test"]
 }
