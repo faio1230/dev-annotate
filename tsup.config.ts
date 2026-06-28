@@ -14,8 +14,5 @@ export default defineConfig({
   clean: true,
   dts: false,
   splitting: false,
-  banner: ({ format }) => (format === 'esm' ? {} : {}),
-  esbuildOptions(options) {
-    options.banner = { js: '' }
-  },
+  external: ['#imports'],
 })
