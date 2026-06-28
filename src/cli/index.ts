@@ -35,7 +35,7 @@ const USAGE = `usage: dev-annotate <latest|list|watch|clean> [options]
   watch  [--json] [--dir D]          print path when a new annotation arrives
   clean  [--keep N | --all] [--yes] [--dir D]   delete old/all annotations
 
-  --dir D  annotation directory (default: cwd; server saves to ${DEFAULT_DIR})`
+  --dir D  annotation directory (default: ${DEFAULT_DIR})`
 
 export function runCli(argv: string[], io: Io = {}): number {
   const log = io.log ?? ((s: string) => process.stdout.write(s + '\n'))
@@ -43,7 +43,7 @@ export function runCli(argv: string[], io: Io = {}): number {
   const cwd = io.cwd ?? process.cwd()
   const [cmd, ...rest] = argv
   const flags = parseFlags(rest)
-  const dir = flags.dir ? resolve(cwd, flags.dir) : cwd
+  const dir = resolve(cwd, flags.dir ?? DEFAULT_DIR)
 
   const emit = (files: AnnotationFile[]) => {
     if (flags.json) log(JSON.stringify(files.map(f => ({ path: f.path, name: f.name, bytes: f.bytes, mtimeMs: f.mtimeMs })), null, 2))
