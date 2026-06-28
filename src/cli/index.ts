@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { resolve } from 'node:path'
-import { unlinkSync, watch as fsWatch } from 'node:fs'
+import { realpathSync, unlinkSync, watch as fsWatch } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { listAnnotations, latestAnnotation, type AnnotationFile } from '../shared/store.js'
 import { DEFAULT_DIR } from '../server/save.js'
 
@@ -95,7 +96,15 @@ export function runCli(argv: string[], io: Io = {}): number {
   }
 }
 
-// bin entry
-if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('cli.js')) {
-  process.exit(runCli(process.argv.slice(2)))
+// bin entry: run only when this file is the invoked script (not when imported by tests)
+const invokedPath = process.argv[1]
+if (invokedPath) {
+  try {
+    if (realpathSync(invokedPath) === fileURLToPath(import.meta.url)) {
+      process.exitCode = runCli(process.argv.slice(2))
+    }
+  }
+  catch {
+    // process.argv[1] not a resolvable path → not invoked as a script; do nothing
+  }
 }
