@@ -25,6 +25,7 @@
     "@nuxt/kit": { "optional": true }
   },
   "devDependencies": {
+    "@types/node": "^22.10.2",
     "tsup": "^8.5.1",
     "typescript": "^5.7.3",
     "vitest": "^3.2.4",
