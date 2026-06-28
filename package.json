@@ -8,9 +8,9 @@
   "engines": { "node": ">=20" },
   "bin": { "dev-annotate": "dist/cli.js" },
   "exports": {
-    ".": { "import": "./dist/core/client.js", "types": "./src/core/client.ts" },
-    "./server": { "import": "./dist/server/index.js", "types": "./src/server/index.ts" },
-    "./nuxt": { "import": "./dist/nuxt/module.js", "types": "./src/nuxt/module.ts" }
+    ".": { "import": "./dist/core/client.js", "types": "./dist/core/client.d.ts" },
+    "./server": { "import": "./dist/server/index.js", "types": "./dist/server/index.d.ts" },
+    "./nuxt": { "import": "./dist/nuxt/module.js", "types": "./dist/nuxt/module.d.ts" }
   },
   "files": ["dist", "templates", "README.md", "LICENSE"],
   "scripts": {

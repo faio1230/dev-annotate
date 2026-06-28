@@ -12,7 +12,7 @@ export default defineConfig({
   format: ['esm'],
   outDir: 'dist',
   clean: true,
-  dts: false,
+  dts: true,
   splitting: false,
   external: ['#imports'],
 })
