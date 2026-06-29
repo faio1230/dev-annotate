@@ -2,7 +2,7 @@ import { defineNuxtModule, addPlugin, addServerHandler, createResolver } from '@
 import type { DevAnnotationOptions } from '../core/types.js'
 
 export interface ModuleOptions extends DevAnnotationOptions {
-  /** Server-side save directory. Default '.playwright-mcp/design-review'. */
+  /** Server-side save directory. Default '.dev-annotations'. */
   dir?: string
 }
 

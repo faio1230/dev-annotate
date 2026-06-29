@@ -3,6 +3,7 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync, utimesSync, readdirSync 
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { runCli } from '../src/cli/index.js'
+import { DEFAULT_DIR } from '../src/server/save.js'
 
 let dir: string
 let saveDir: string
@@ -17,13 +18,17 @@ function touch(name: string, ageSeconds: number) {
 function io() { return { cwd: dir, log: (s: string) => out.push(s), error: (s: string) => err.push(s) } }
 beforeEach(() => {
   dir = mkdtempSync(join(tmpdir(), 'da-cli-'))
-  saveDir = join(dir, '.playwright-mcp', 'design-review')
+  saveDir = join(dir, DEFAULT_DIR)
   mkdirSync(saveDir, { recursive: true })
   out = []; err = []
 })
 afterEach(() => rmSync(dir, { recursive: true, force: true }))
 
 describe('runCli', () => {
+  it('default dir basename is .dev-annotations', () => {
+    expect(DEFAULT_DIR).toBe('.dev-annotations')
+  })
+
   it('latest prints the newest annotated path', () => {
     touch('annotated-old.png', 100)
     touch('annotated-new.png', 1)

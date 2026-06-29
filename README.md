@@ -38,7 +38,7 @@ injected DOM and listeners.
 
 ```ts
 import { createSaveAnnotationHandler } from 'dev-annotate/server'
-export default createSaveAnnotationHandler({ dir: '.playwright-mcp/design-review' })
+export default createSaveAnnotationHandler({ dir: '.dev-annotations' })
 ```
 
 Or use the pure writer directly:

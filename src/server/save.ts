@@ -12,7 +12,7 @@ export interface SaveAnnotationResult {
   bytes: number
 }
 
-export const DEFAULT_DIR = '.playwright-mcp/design-review'
+export const DEFAULT_DIR = '.dev-annotations'
 
 export function saveAnnotationBytes(
   data: Uint8Array,

@@ -25,7 +25,7 @@ annotated screenshot and act on it.
    ```
 
 ## Notes
-- Screenshots live under `.playwright-mcp/design-review/annotated-*.{png,jpg,webp}`
+- Screenshots live under `.dev-annotations/annotated-*.{png,jpg,webp}`
   by default (override with `--dir`).
 - Treat an annotation as intent, not pixels: confirm the underlying cause
   before changing how something looks.
