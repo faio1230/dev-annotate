@@ -1,6 +1,6 @@
 {
   "name": "dev-annotate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Dev-only on-screen annotation tool: scribble on the live page, take an OS screenshot, upload it for an AI agent to read.",
   "type": "module",
   "license": "MIT",

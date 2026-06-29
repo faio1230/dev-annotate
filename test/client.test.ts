@@ -33,4 +33,22 @@ describe('initDevAnnotation', () => {
     expect(swatches.length).toBe(2)
     destroy()
   })
+
+  it('falls back to defaults for malformed config (e.g. Nuxt runtime-config empties)', () => {
+    // Nuxt serializes `undefined` public runtime-config values to "", which is
+    // not caught by `?? DEFAULTS`. Passing such a shape must not throw.
+    const bad = {
+      endpoint: '',
+      colors: '' as unknown as string[],
+      sizes: '' as unknown as { label: string; pen: number; font: number }[],
+      shortcutKey: '',
+      zIndexBase: '' as unknown as number,
+    }
+    const destroy = initDevAnnotation(bad)
+    // default palette has 4 swatches; renders instead of crashing
+    expect(document.querySelectorAll('.__da-swatch').length).toBe(4)
+    expect(document.getElementById('__da-bar')).not.toBeNull()
+    destroy()
+    expect(document.querySelectorAll('[id^="__da-"]').length).toBe(0)
+  })
 })

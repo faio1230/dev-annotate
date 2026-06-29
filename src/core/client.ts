@@ -2,11 +2,14 @@ import { DEFAULTS, type DevAnnotationOptions } from './types.js'
 export type { DevAnnotationOptions } from './types.js'
 
 export function initDevAnnotation(options: DevAnnotationOptions = {}): () => void {
-  const endpoint    = options.endpoint    ?? DEFAULTS.endpoint
-  const colors      = options.colors      ?? DEFAULTS.colors
-  const sizePresets = options.sizes       ?? DEFAULTS.sizes
-  const shortcutKey = (options.shortcutKey ?? DEFAULTS.shortcutKey).toLowerCase()
-  const z           = options.zIndexBase  ?? DEFAULTS.zIndexBase
+  // Defensive fallbacks: callers (e.g. Nuxt runtime config) may hand us empty
+  // strings or otherwise malformed values for which `??` is not enough, so we
+  // validate the shape before use to avoid `colors.map` / `sizes.map` crashes.
+  const endpoint    = typeof options.endpoint === 'string' && options.endpoint ? options.endpoint : DEFAULTS.endpoint
+  const colors      = Array.isArray(options.colors) && options.colors.length ? options.colors : DEFAULTS.colors
+  const sizePresets = Array.isArray(options.sizes) && options.sizes.length ? options.sizes : DEFAULTS.sizes
+  const shortcutKey = (typeof options.shortcutKey === 'string' && options.shortcutKey ? options.shortcutKey : DEFAULTS.shortcutKey).toLowerCase()
+  const z           = typeof options.zIndexBase === 'number' ? options.zIndexBase : DEFAULTS.zIndexBase
 
   // ── Teardown registry ───────────────────────────────────────
   const nodes: ChildNode[] = []
